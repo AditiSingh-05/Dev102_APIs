@@ -5,33 +5,32 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/notes")
 public class MyController {
     @Autowired
-    NotesService service;
-
+    private NotesService service;
 
     @PostMapping("/add")
-    public Note message(@RequestBody Note note) {
+    public Note addNote(@RequestBody Note note) {
         service.addNote(note);
         return note;
     }
+
     @GetMapping("/get/{username}")
     public List<Note> getNotes(@PathVariable String username){
-        return service.getNotes();
+        return service.getNotes(username);
     }
 
-    @DeleteMapping
-    public void deleteNotes(){
+    @DeleteMapping("/delete")
+    public String deleteNotes(){
+        service.deleteAllNotes();
+        return "All notes deleted.";
     }
+
     @PostMapping("/create-user")
-    public void createUser(@RequestBody User user){
+    public String createUser(@RequestBody User user){
         service.createUser(user);
+        return "User created successfully.";
     }
-
-
 }
-
-

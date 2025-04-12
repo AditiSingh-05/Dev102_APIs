@@ -7,17 +7,26 @@ import java.util.List;
 
 @Service
 public class NotesService {
+
     @Autowired
-    NotesRepository<U, S> repo;
+    private NotesRepository notesRepo;
+
+    @Autowired
+    private UserRepository userRepo;
 
     public void addNote(Note note){
-        repo.save(note);
+        notesRepo.save(note);
     }
 
-    public List<Note> getNotes() {
-        return repo.findAll();
+    public List<Note> getNotes(String username){
+        return notesRepo.findByUsername(username);
     }
 
-    public void createUser(User user) {
+    public void createUser(User user){
+        userRepo.save(user);
+    }
+
+    public void deleteAllNotes(){
+        notesRepo.deleteAll();
     }
 }

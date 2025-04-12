@@ -30,11 +30,5 @@ public class User {
         this.password = password;
     }
 
-    public List<Object> getIds() {
-        return ids;
-    }
 
-    public void setIds(List<Object> ids) {
-        this.ids = ids;
-    }
 }
